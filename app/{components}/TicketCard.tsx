@@ -4,23 +4,10 @@ import PriorityDisplay from "./PriorityDisplay";
 import ProgressBar from "./ProgressBar";
 import StatusDisplay from "./StatusDisplay";
 import Link from "next/link";
+import { Ticket } from "../types";
+import { formatTimeStamp } from "../utils";
 
-const TicketCard = ({ ticket }: any) => {
-  const formatTimeStamp = (timestamp: any) => {
-    const options: any = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minit: "2-digit",
-      hour12: true,
-    };
-
-    const date = new Date(timestamp);
-    const formattedDate = date.toLocaleString("en-US", options);
-    return formattedDate;
-  };
-
+const TicketCard = ({ ticket }: Ticket) => {
   return (
     <div className="flex flex-col bg-card hover:bg-card-hover rounded-md shadow-lg p-3 m-2">
       <div className="flex mb-3">

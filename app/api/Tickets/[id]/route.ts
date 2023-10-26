@@ -31,7 +31,7 @@ export async function PUT(req: NextRequest, { params }: any) {
     const { id } = params;
     const body = await req.json();
     const ticketData = body.formData;
-    const updateTicketData = await Ticket.findByIdAndUpdate(id, {
+    await Ticket.findByIdAndUpdate(id, {
       ...ticketData,
     });
     return NextResponse.json({ message: "Ticket updated" }, { status: 200 });
