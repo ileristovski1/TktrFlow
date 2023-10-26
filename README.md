@@ -24,8 +24,7 @@ TktrFlow is a comprehensive ticketing application designed to streamline task an
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/tktrflow.git
-cd tktrflow
+git clone https://github.com/ileristovski1/TktrFlow.git
 ```
 
 2. Install dependencies:
@@ -52,8 +51,6 @@ Update the configuration in the `.env.local` file to customize your TktrFlow ins
 # MongoDB Connection
 MONGODB_URI=your_mongodb_connection_string
 
-# Application Port
-PORT=3000
 ```
 
 ## Contributing
