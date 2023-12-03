@@ -1,25 +1,26 @@
-import mongoose, { Schema } from "mongoose";
+import admin from "firebase-admin";
 
-const connectionString = process.env.MONGODB_URI || "";
+const serviceAccount = require("path/to/your/serviceAccountKey.json");
 
-mongoose.connect(connectionString);
-mongoose.Promise = global.Promise;
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://your-firebase-project-id.firebaseio.com",
+});
 
-const ticketSchema = new Schema(
-  {
-    title: String,
-    description: String,
-    category: String,
-    priority: Number,
-    progress: Number,
-    status: String,
-    active: Boolean,
+const db = admin.database();
+const ticketsRef = db.ref("tickets");
+
+const Ticket = {
+  getAll: async () => {
+    const snapshot = await ticketsRef.once("value");
+    return snapshot.val();
   },
-  {
-    timestamps: true,
-  }
-);
-
-const Ticket = mongoose.models.Ticket || mongoose.model("Ticket", ticketSchema);
+  create: async (ticketData: any) => {
+    const newTicketRef = ticketsRef.push();
+    await newTicketRef.set(ticketData);
+    return newTicketRef.key;
+  },
+  // Add other CRUD operations as needed
+};
 
 export default Ticket;
